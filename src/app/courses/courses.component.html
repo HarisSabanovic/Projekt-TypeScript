@@ -1,7 +1,29 @@
 <h2>Kurser</h2>
 
-<ul>
-    <li *ngFor="let course of courselist">
-        {{ course.courseCode }} : {{ course.courseName }}
-    </li>
-</ul>
+<div class="table-container">
+
+    <label for="filter">Sök kurs:</label>
+    <input type="text" id="filter">
+
+<table class="course-table">
+    <thead>
+        <th (click)="sortCourseCode()" >Kurskod</th>
+        <th (click)="sortCourseName()" >Kursnamn</th>
+        <th>Ämne</th>
+        <th>Poäng</th>
+        <th>Kursplan</th>
+        <th>Lägg till</th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let course of courselist">
+            <td>{{ course.courseCode }}</td>
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.subject }}</td>
+            <td>{{ course.points }}</td>
+            <td><a [href]="course.syllabus" target="_blank" >Kursplan</a></td>
+            <button>Lägg till</button>
+        </tr>
+    </tbody>
+</table>
+</div>

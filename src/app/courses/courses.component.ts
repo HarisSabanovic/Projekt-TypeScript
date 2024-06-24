@@ -20,5 +20,13 @@ export class CoursesComponent {
     this.coursesservice.getCourses().subscribe(data => {
       this.courselist = data;
     })
-  }
+  };
+
+  sortCourseCode() {
+    this.courselist.sort((a,b) => a.courseCode.localeCompare(b.courseCode))
+  };
+
+  sortCourseName() {
+    this.courselist.sort((a,b) => a.courseName.localeCompare(b.courseName))
+  };
 }
