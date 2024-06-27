@@ -1,0 +1,19 @@
+<h2>Mitt Ramschema</h2>
+
+<div class="table-container">
+
+<table class="course-table">
+
+
+    <tbody>
+        <tr *ngFor="let course of frameworkList">
+            <td>{{ course.courseCode }}</td>
+            <td>{{ course.courseName }}</td>
+            <td>{{ course.subject }}</td>
+            <td>{{ course.points }}</td>
+            <td id="courseplan" ><a [href]="course.syllabus" target="_blank" >Kursplan</a></td>
+            <!--<button (click)= "addcourse(course)" >+</button>-->
+        </tr>
+    </tbody>
+</table>
+</div>
