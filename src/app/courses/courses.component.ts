@@ -4,6 +4,7 @@ import { CoursesService } from '../services/courses.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SharedService } from '../shared.service';
 
 
 @Component({
@@ -20,16 +21,32 @@ export class CoursesComponent {
   uniqueSubjects: string [] = [];
   selectedSubject: string = "";
   frameworkList: Course[] = [];
+  paginatedCourses: Course[] = [];
+
+  itemsPerPage: number = 10;
+  currentPage: number = 1;
   
-  constructor(private coursesservice : CoursesService) {}
+  constructor(private coursesService : CoursesService, private sharedService : SharedService) {}
 
   ngOnInit() {
-    this.coursesservice.getCourses().subscribe(data => {
+    this.coursesService.getCourses().subscribe(data => {
       this.courselist = data;
       this.filteredCourses = data;
+      this.updatePagination();
+      //this.displayItem(data);
       this.removeDups();
     })
+
+
+    this.loadSavedCourses();
   }
+
+  addCourse(course: Course): void {
+    this.sharedService.addCourse(course);
+    console.log('Course added:', course);
+    this.saveCourse();
+  }
+
 
   sortCourseCode() {
     this.courselist.sort((a,b) => a.courseCode.localeCompare(b.courseCode))
@@ -44,6 +61,9 @@ export class CoursesComponent {
       course.courseName.toLowerCase().includes(this.filterValue.toLowerCase()) ||
       course.courseCode.toLowerCase().includes(this.filterValue.toLowerCase())
     );
+
+    this.currentPage = 1;
+    this.updatePagination();
   }
 
   removeDups(): void {
@@ -56,11 +76,42 @@ export class CoursesComponent {
     this.filteredCourses = this.courselist.filter((course) => 
       course.subject.toLowerCase().includes(this.selectedSubject.toLowerCase())
     );
+
+    this.currentPage = 1;
+    this.updatePagination();
   }
-  addcourse(course: Course): void {
-    if(!this.frameworkList.includes(course)) {
-      this.frameworkList.push(course);
+  
+
+  updatePagination(): void {
+    const startIndex: number = (this.currentPage) * this.itemsPerPage;
+    const endIndex: number = startIndex + this.itemsPerPage;
+    this.paginatedCourses = this.filteredCourses.slice(startIndex, endIndex);
+  }
+
+  previousPage(): void {
+    if(this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
     }
   }
+
+  nextPage(): void {
+    if(this.currentPage < Math.ceil(this.filteredCourses.length / this.itemsPerPage)) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+  saveCourse() {
+    localStorage.setItem("frameworkCourse", JSON.stringify(this.frameworkList));
+  }
     
+  loadSavedCourses() {
+    let savedCourses = localStorage.getItem("frameworkCourse");
+    if(savedCourses) {
+      this.frameworkList = JSON.parse(savedCourses);
+    }
+  }
+
+
 }
