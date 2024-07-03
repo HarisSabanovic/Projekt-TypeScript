@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { Course } from '../model/course';
 import { FormsModule } from '@angular/forms';
 import { CoursesService } from '../services/courses.service';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-framework',
@@ -16,6 +17,13 @@ export class FrameworkComponent {
  frameworkList: Course[] = [];
 
 
- constructor(private coursesservice : CoursesService) {}
+ constructor(private sharedservice : SharedService) {}
+
+ ngOnInit() {
+  this.sharedservice.course$.subscribe(courses => {
+    this.frameworkList = courses;
+    console.log('Framework list:', this.frameworkList);
+  })
+ }
   
 }
