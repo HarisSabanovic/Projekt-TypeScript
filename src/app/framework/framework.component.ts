@@ -15,6 +15,7 @@ import { SharedService } from '../shared.service';
 })
 export class FrameworkComponent {
  frameworkList: Course[] = [];
+ totalPoints: number = 0;
 
 
  constructor(private sharedservice : SharedService) {}
@@ -22,8 +23,17 @@ export class FrameworkComponent {
  ngOnInit() {
   this.sharedservice.course$.subscribe(courses => {
     this.frameworkList = courses;
+    this.addPoints();
     console.log('Framework list:', this.frameworkList);
   })
+ }
+
+ removeCourse(course: Course):void {
+  this.sharedservice.removeCourse(course);
+ }
+
+ addPoints(): void  {
+  this.totalPoints = this.frameworkList.reduce((sum, course) => sum + course.points, 0)
  }
   
 }

@@ -13,9 +13,9 @@ export class SharedService {
   course$ = this.coursesFramework.asObservable();
 
   constructor() {
-    // Ladda sparade kurser vid initialisering
+    // laddar sparade kurser vid initialisering
     this.loadCourses();
-  }
+  } 
 
   addCourse(course: Course) {
     const currentCourses = this.coursesFramework.getValue();
@@ -25,12 +25,20 @@ export class SharedService {
     console.log('Current courses after adding:', updatedCourses);
   }
 
-  private saveCourses(courses: Course[]): void {
+   saveCourses(courses: Course[]): void {
     // Konvertera till JSON och spara i localStorage
     localStorage.setItem('coursesFramework', JSON.stringify(courses));
   }
 
-  private loadCourses(): void {
+  removeCourse(course: Course): void {
+    const currentCourses = this.coursesFramework.getValue();
+    const updatedCourses = currentCourses.filter(c => c.courseCode !== course.courseCode);
+    this.coursesFramework.next(updatedCourses);
+    this.saveCourses(updatedCourses);
+    console.log('Current courses after removing:', updatedCourses);
+  }
+
+   loadCourses(): void {
     // Hämta sparade kurser från localStorage vid start
     const savedCourses = localStorage.getItem('coursesFramework');
     if (savedCourses) {

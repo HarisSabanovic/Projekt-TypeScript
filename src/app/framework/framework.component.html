@@ -4,16 +4,28 @@
 
 <table class="course-table">
 
+    <thead>
+        <th>Kurskod</th>
+        <th>Kursnamn</th> 
+        <th>Ämne</th>
+        <th>Poäng</th>
+        <th>Kursplan</th>
+        <th>Radera</th>
+    </thead>
 
     <tbody>
-        <tr *ngFor="let course of frameworkList">
-            <td>{{ course.courseCode }}</td>
-            <td>{{ course.courseName }}</td>
-            <td>{{ course.subject }}</td>
-            <td>{{ course.points }}</td>
-            <td id="courseplan" ><a [href]="course.syllabus" target="_blank" >Kursplan</a></td>
-            <!--<button (click)= "addcourse(course)" >+</button>-->
+        <tr *ngFor= "let courses of frameworkList">
+            <td>{{ courses.courseCode }}</td>
+            <td>{{ courses.courseName }}</td>
+            <td>{{ courses.subject }}</td>
+            <td>{{ courses.points }}</td>
+            <td><a [href]="courses.syllabus" target="_blank" id="courseplan" >Kursplan</a></td>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" (click) = "removeCourse(courses)" ><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
         </tr>
+
+        <div id="pagination">
+            <p>{{ totalPoints }}</p>
+        </div>
     </tbody>
 </table>
 </div>
