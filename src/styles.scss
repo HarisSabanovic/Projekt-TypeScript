@@ -27,6 +27,7 @@ body {
       cursor: pointer;
       margin-left: 50px;
       margin-top: 20px;
+      background-color: #55c2da;
     }
   
     @keyframes rotate {
@@ -89,15 +90,20 @@ body {
       margin-bottom: 20px;
       font-size: 14px;
       border-collapse: collapse;
+      table-layout: fixed;
     }
   
     thead {
       color: black;
       text-align: left;
     }
-    th {
-      padding: 10px;
+
+    th, td {
+      padding: 1em;
       width: 100px;
+      white-space: nowrap; 
+      overflow: hidden; 
+      text-overflow: ellipsis; 
     }
   
     tr {
@@ -106,7 +112,6 @@ body {
   
     td {
       padding: 1em;
-      border-bottom: 1px solid black;
     }
   
     #courseplan {

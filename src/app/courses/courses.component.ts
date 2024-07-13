@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedService } from '../shared.service';
+import { FrameworkComponent } from '../framework/framework.component';
 
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule],
+  imports: [CommonModule, RouterLink, FormsModule, FrameworkComponent],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss'
 })
@@ -43,6 +44,7 @@ export class CoursesComponent {
 
   addCourse(course: Course): void {
     this.sharedService.addCourse(course);
+    alert("Kursen har lagts till");
     console.log('Course added:', course);
     this.saveCourse();
   }
