@@ -1,5 +1,10 @@
+$primary-color: #1E3A8A; /* Blue */
+$secondary-color: #FFFFFF; /* White */
+$accent-color: #F97316; /* Orange */
+
+
 header {
-    background-color: #0044cc;
+    background-color: $primary-color;
     color: white;
     padding: 10px 0;
   
@@ -24,17 +29,28 @@ header {
   
       li {
         margin-left: 20px;
+        
   
         a {
-          color: white;
+          color: $secondary-color;
           text-decoration: none;
           font-weight: bold;
           transition: color 0.3s;
+          font-size: 22px;
   
           &:hover {
-            color: #ffcc00;
+            color: $accent-color;
           }
         }
+      }
+    }
+  }
+
+
+  @media only screen and (max-width: 800px){
+    header {
+      li {
+        display: none;
       }
     }
   }
