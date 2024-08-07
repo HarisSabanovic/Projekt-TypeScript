@@ -13,33 +13,29 @@
 
 <table class="course-table">
     <thead>
-        <th (click)="sortCourseCode()" >Kurskod</th>
-        <th (click)="sortCourseName()" >Kursnamn</th>
-        <th>Ämne</th>
-        <th>Poäng</th>
-        <th>Kursplan</th>
-        <th>Lägg till</th>
+        <th (click)="sortCourseCode()" class="column-courseCode">Kurskod</th>
+        <th (click)="sortCourseName()" class="column-courseName">Kursnamn</th>
+        <th class="column-subject">Ämne</th>
+        <th class="column-points">Poäng</th>
+        <th class="column-syllabus">Kursplan</th>
+        <th class="column-add">Lägg till</th>
     </thead>
 
     <tbody>
         <tr *ngFor="let course of paginatedCourses">
-            <td>{{ course.courseCode }}</td>
-            <td>{{ course.courseName }}</td>
-            <td>{{ course.subject }}</td>
-            <td>{{ course.points }}</td>
-            <td><a [href]="course.syllabus" target="_blank" id="courseplan" >Kursplan</a></td>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" (click) = "addCourse(course)" id="addcourse-btn"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+            <td class="column-courseCode">{{ course.courseCode }}</td>
+            <td class="column-courseName">{{ course.courseName }}</td>
+            <td class="column-subject">{{ course.subject }}</td>
+            <td class="column-points">{{ course.points }}</td>
+            <td class="column-syllabus"><a [href]="course.syllabus" target="_blank" id="courseplan">Kursplan</a></td>
+            <td class="column-add">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" (click)="addCourse(course)" id="addcourse-btn">
+            <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/>
+            </svg> </td>
         </tr>
     </tbody>
 
     <div id="page-controls">
-
-        <select [(ngModel)] = "itemsPerPage" (change) = "updatePagination()" id="totalPages">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-        </select>
-    
         <button (click) = "previousPage()" [disabled] = "currentPage===1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg></button>
         <span>Page {{ currentPage }} of {{ filteredCourses.length  }}</span>
         <button (click) = "nextPage()" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></button>
