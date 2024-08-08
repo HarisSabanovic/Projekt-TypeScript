@@ -35,5 +35,21 @@ export class FrameworkComponent {
  addPoints(): void  {
   this.totalPoints = this.frameworkList.reduce((sum, course) => sum + course.points, 0)
  }
+
+ sortCourseCode() {
+  this.frameworkList = this.frameworkList.sort((a,b) => a.courseCode.localeCompare(b.courseCode));
+}
+
+sortCourseName() {
+  this.frameworkList = this.frameworkList.sort((a,b) => a.courseName.localeCompare(b.courseName));
+}
+
+sortCourseSubject() {
+  this.frameworkList = this.frameworkList.sort((a,b) => a.subject.localeCompare(b.subject));
+}
+
+sortCoursePoints() {
+  this.frameworkList.sort((a,b) => a.points - b.points);
+}
   
 }

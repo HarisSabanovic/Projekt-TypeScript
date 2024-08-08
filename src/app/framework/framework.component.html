@@ -5,20 +5,20 @@
 <table class="course-table">
 
     <thead>
-        <th class="column-courseCode">Kurskod</th>
-        <th class="column-courseName">Kursnamn</th>
-        <th class="column-subject">Ämne</th>
-        <th class="column-points">Poäng</th>
+        <th (click)="sortCourseCode()" class="column-courseCode">Kurskod</th>
+        <th (click)="sortCourseName()" class="column-courseName">Kursnamn</th>
+        <th (click)="sortCourseSubject()" class="column-subject">Ämne</th>
+        <th (click)="sortCoursePoints()" class="column-points">Poäng</th>
         <th class="column-syllabus">Kursplan</th>
-        <th class="column-add">Lägg till</th>
+        <th class="column-add">Ta bort</th>
     </thead>
 
     <tbody>
         <tr *ngFor= "let courses of frameworkList">
-            <td class="column-courseCode">{{ courses.courseCode }}</td>
-            <td class="column-courseName">{{ courses.courseName }}</td>
-            <td class="column-subject">{{ courses.subject }}</td>
-            <td class="column-points">{{ courses.points }}</td>
+            <td  class="column-courseCode">{{ courses.courseCode }}</td>
+            <td  class="column-courseName">{{ courses.courseName }}</td>
+            <td  class="column-subject">{{ courses.subject }}</td>
+            <td  class="column-points">{{ courses.points }}</td>
             <td class="column-syllabus"><a [href]="courses.syllabus" target="_blank" id="courseplan">Kursplan</a></td>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" (click) = "removeCourse(courses)" ><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>
         </tr>
