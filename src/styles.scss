@@ -84,6 +84,32 @@ body {
       table-layout: fixed;
     }
 
+    th {
+      position: relative; 
+      padding: 10px 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: color 0.3s ease; 
+    
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: lighten($primary-color, 30%);
+        transform: scaleX(0); 
+        transform-origin: bottom right; 
+        transition: transform 0.3s ease;
+      }
+    
+      &:hover:before {
+        transform: scaleX(1);
+        transform-origin: bottom left; 
+      }
+    }
+
     @media (max-width: 700px) {
       .table-container {
           width: 100%;
