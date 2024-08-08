@@ -26,37 +26,77 @@ export class CoursesComponent {
 
   itemsPerPage: number = 10;
   currentPage: number = 1;
+  totalPages: number = 0;
   
   constructor(private coursesService : CoursesService, private sharedService : SharedService) {}
 
   ngOnInit() {
+
+    this.sharedService.course$.subscribe(courses => {
+      this.frameworkList = courses;
+    });
+
     this.coursesService.getCourses().subscribe(data => {
       this.courselist = data;
       this.filteredCourses = data;
       this.updatePagination();
-      //this.displayItem(data);
       this.removeDups();
     })
-
-
-    this.loadSavedCourses();
   }
 
   addCourse(course: Course): void {
-    this.sharedService.addCourse(course);
-    alert("Kursen har lagts till");
+
+
+    let isSame = this.frameworkList.some(function(c) {
+      return c.courseCode.toLowerCase() === course.courseCode.toLowerCase();
+    });
+
+    if (isSame) {
+      const errorNotification = document.getElementById("errorNotification") as HTMLDivElement;
+      errorNotification.classList.remove("hidden");
+      errorNotification.classList.add("show");
+
+      setTimeout(() => {
+        errorNotification.classList.remove("show");
+        errorNotification.classList.add("hidden");
+      }, 2000);
+
+    } else {
+      this.sharedService.addCourse(course);
+      const notification = document.getElementById("notification") as HTMLDivElement;
+      notification.classList.remove("hidden");
+      notification.classList.add("show");
+
+      setTimeout(() => {
+        notification.classList.remove("show");
+        notification.classList.add("hidden");
+      }, 2000);
+
+    }
+
     console.log('Course added:', course);
-    this.saveCourse();
   }
 
 
   sortCourseCode() {
-    this.courselist.sort((a,b) => a.courseCode.localeCompare(b.courseCode))
-  };
+    this.courselist.sort((a,b) => a.courseCode.localeCompare(b.courseCode));
+    this.updatePagination();
+  }
 
   sortCourseName() {
-    this.courselist.sort((a,b) => a.courseName.localeCompare(b.courseName))
-  };
+    this.courselist.sort((a,b) => a.courseName.localeCompare(b.courseName));
+    this.updatePagination();
+  }
+
+  sortCourseSubject() {
+    this.courselist.sort((a,b) => a.subject.localeCompare(b.subject));
+    this.updatePagination();
+  }
+
+  sortCoursePoints() {
+    this.courselist.sort((a,b) => a.points - b.points);
+    this.updatePagination();
+  }
 
   applyFilter(): void {
     this.filteredCourses = this.courselist.filter((course) => 
@@ -85,9 +125,11 @@ export class CoursesComponent {
   
 
   updatePagination(): void {
-    const startIndex: number = (this.currentPage) * this.itemsPerPage;
-    const endIndex: number = startIndex + this.itemsPerPage;
+    const startIndex: number = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex: number = Math.min(startIndex + this.itemsPerPage, this.filteredCourses.length);
     this.paginatedCourses = this.filteredCourses.slice(startIndex, endIndex);
+
+    this.totalPages = Math.ceil(this.filteredCourses.length / this.itemsPerPage);
   }
 
   previousPage(): void {
@@ -104,16 +146,6 @@ export class CoursesComponent {
     }
   }
 
-  saveCourse() {
-    localStorage.setItem("frameworkCourse", JSON.stringify(this.frameworkList));
-  }
-    
-  loadSavedCourses() {
-    let savedCourses = localStorage.getItem("frameworkCourse");
-    if(savedCourses) {
-      this.frameworkList = JSON.parse(savedCourses);
-    }
-  }
 
 
 }
