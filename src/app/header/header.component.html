@@ -3,12 +3,20 @@
       <div class="logo">
        <img src="assets/logo-universitet.png">
       </div>
-      <nav>
-        <ul>
-          <li><a routerLink ="/">Hem</a></li>
-          <li><a routerLink="courses">Kurser</a></li>
-          <li><a routerLink ="/framework">Ramschema</a></li>
-        </ul>
-      </nav>
+
+      <input type="checkbox" id="check">
+      <label for="check" class="menuToggle">
+        <div class="spinner diagonal-1"></div>
+        <div class="horizontal"></div>
+        <div class="spinner diagonal-2"></div>
+      </label>
+
+      <div id="sideMenu">
+        <div class="menuLinks">
+          <a routerLink="/">Startsida</a>
+          <a routerLink="/courses">Kurser</a>
+          <a routerLink="/framework">Ramschema</a>
+        </div>
+      </div>
     </div>
   </header>
