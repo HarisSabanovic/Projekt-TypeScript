@@ -16,6 +16,7 @@ import { FrameworkComponent } from '../framework/framework.component';
   styleUrl: './courses.component.scss'
 })
 export class CoursesComponent {
+  //variabler och array
   courselist: Course[] = [];
   filteredCourses: Course[] = [];
   filterValue: string = "" ;
