@@ -1,27 +1,27 @@
 # ProjektTypeScript
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+## Beskrivning
+Detta projekt är en webbapplikation byggd med Angular och TypeScript som tillåter användare att hantera universitetskurser. Användarna kan lägga till kurser till sitt ramschema, radera kurser, samt filtrera kurser efter ämne, kursnamn och kurskod. Webbplatsen består av tre huvudsidor: en startsida med information om universitetet, en undersida för att hantera kurser och en undersida för att visa och hantera ramschemat.
 
-## Development server
+### Funktioner 🛠️
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Startsida:** Introducerar besökare till universitetet med allmän information om vad som erbjuds.
+- **Kursadministration:** Låter användare visa alla tillgängliga kurser, lägga till dem i ramschemat samt filtrera kurserna efter ämne, kursnamn och kurskod.
+- **Ramschema:** Visar användarens valda kurser, där de kan radera kurser samt se det totala antalet poäng för kurserna i schemat.
 
-## Code scaffolding
+### Teknologier 🌐
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **Angular:** Ramverket för att bygga webbapplikationen.
+- **TypeScript:** Ett strikttyped superset av JavaScript som används för att skapa typ-säker kod.
+- **Shared Service:** Används för att möjliggöra kommunikation mellan olika komponenter i applikationen.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Kontakta mig 📞 
 
-## Running unit tests
+Du kan nå mig via följande kontaktuppgifter:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- 👤 **Namn:** [Haris Sabanovic]
+- 📧 **E-post:** [haris18sabanovic@outlook.com](mailto:haris18sabanovic@outlook.com)
+- 💼 **GitHub:** [github.com/HarisSabanovic](https://github.com/HarisSabanovic)
+- 🔗 **LinkedIn:** [linkedin.com/in/HarisSabanovic](https://www.linkedin.com/in/HarisSabanovic)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
